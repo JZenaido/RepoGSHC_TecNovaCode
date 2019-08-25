@@ -14,34 +14,44 @@ namespace GSHCService
     {
 
         [OperationContract]
-        string GetData(int value);
+        mensaje Validacion(string email, string pass, string pin);
 
         [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
+        string CrearCuenta(string Nombre,string apaterno,string amaterno,string telefono, string email,string pass);
+
+        [OperationContract]
+        string CambiarPin(string email, string pass);
+        [OperationContract]
+        UsuriosGSH GetUsuriosGSH(string email, string pass, string pin);
 
         // TODO: agregue aquí sus operaciones de servicio
     }
 
-
+    [DataContract]
+    public class mensaje
+    {
+        [DataMember]
+        public string Error { get; set; }
+        [DataMember]
+        public bool Acceso { get; set; }
+    }
     // Utilice un contrato de datos, como se ilustra en el ejemplo siguiente, para agregar tipos compuestos a las operaciones de servicio.
     [DataContract]
-    public class CompositeType
+    public class UsuriosGSH: mensaje
     {
-        bool boolValue = true;
-        string stringValue = "Hello ";
-
         [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
-
+        public string Nombre { get; set; }
         [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
+        public string ApePaterno { get; set; }
+        [DataMember]
+        public string ApeMaterno { get; set; }
+        [DataMember]
+        public string Telefono { get; set; }
+        [DataMember]
+        public string Email { get; set; }
+        [DataMember]
+        public string password { get; set; }
+        [DataMember]
+        public string PIN { get; set; }
     }
 }
