@@ -31,6 +31,7 @@ namespace GSHCService
                     acces.strPin = gen.Generar(acces.Usuario.strNombre, acces.Usuario.strnApellidoPaterno, acces.Usuario.strnApellidoMaterno, acces.Usuario.strnTelefono);
                     ser.Entry(acces).State = EntityState.Modified;
                     ser.SaveChanges();
+                    gen.CuerpoMensaje(acces.strPin, acces.strEmail);
                     return "Se realizÓ el cambio de PIN";
                 }
             }
@@ -56,6 +57,7 @@ namespace GSHCService
                     Acceso ac = new Acceso { UsuarioId = us.Id, strEmail = email, strPassword = pass, strPin = gen.Generar(Nombre, apaterno, amaterno, telefono) };
                     ser.Acceso.Add(ac);
                     ser.SaveChanges();
+                    gen.CuerpoMensaje(ac.strPin, ac.strEmail);
                     return "Se registro el Usuario";
                 }
                 catch (Exception e)
