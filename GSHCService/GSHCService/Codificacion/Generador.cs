@@ -48,12 +48,12 @@ namespace GSHCService.Codificacion
         public void EnviarMensaje(MailMessage mail)
         {
             SmtpClient client = new SmtpClient();
-            client.Host = "jzentokens@gmail.com";
+            client.Host = "karen.alv19@gmail.com";
             client.Port = 587;
             client.EnableSsl = true;
             client.UseDefaultCredentials = false;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.Credentials = new System.Net.NetworkCredential("jzentokens@gmail.com", "Token12345");
+            client.Credentials = new System.Net.NetworkCredential("karen.alv19@gmail.com", "truelove061215");
             try
             {
                 client.Send(mail);
@@ -64,11 +64,40 @@ namespace GSHCService.Codificacion
             }
         }
 
+        public void SendEmail(string token, string correo)
+        {
+
+            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            msg.To.Add(correo);
+            msg.From = new MailAddress("karen.alv19@gmail.com", "Tokens", System.Text.Encoding.UTF8);
+            msg.Subject = "PIN";
+            msg.SubjectEncoding = System.Text.Encoding.UTF8;
+            msg.Body = "Su PIN de acceso al sistema es la siguiente:" + "\n" +
+                "Clave: " + token;
+            msg.BodyEncoding = System.Text.Encoding.UTF8;
+            msg.IsBodyHtml = false;
+
+            SmtpClient client = new SmtpClient();
+            client.Credentials = new System.Net.NetworkCredential("karen.alv19@gmail.com", "truelove061215");
+            client.Port = 587;
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true;
+            try
+            {
+                client.Send(msg);
+            }
+            catch (System.Net.Mail.SmtpException ex)
+            {
+               
+            }
+        }
+
+
         public void CuerpoMensaje(string token, string correo)
         {
             string from, to, bcc, cc, subject, body, bodyText;
 
-            from = "jzentokens@gmail.com";
+            from = "karen.alv19@gmail.com";
             to = correo;
             bcc = "";
             cc = "";
